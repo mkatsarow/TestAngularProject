@@ -3,6 +3,14 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-fetch-data',
+  styles: ['#batman { background-color: yellow;}',
+    'td {border: 1px solid #dddddd}'],
+
+//  td, th {
+//    border: 1px solid #dddddd;
+//    text- align: center;
+//padding: 8px;
+//}
   templateUrl: './fetch-data.component.html'
 })
 export class FetchDataComponent {
@@ -17,7 +25,13 @@ export class FetchDataComponent {
 
 interface WeatherForecast {
   date: string;
-  temperatureC: number;
-  temperatureF: number;
+  location: string;
+  maxTemperatureC: number;
+  maxTemperatureF: number;
+  minTemperatureC: number;
+  minTemperatureF: number;
   summary: string;
+  image: string;
+  hours: number[];
+  title: string; 
 }
