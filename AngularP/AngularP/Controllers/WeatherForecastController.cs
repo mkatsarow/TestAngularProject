@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace AngularP.Controllers
 {
@@ -31,9 +33,9 @@ namespace AngularP.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            
+
 
             var rng = new Random();
             var list = Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -49,8 +51,38 @@ namespace AngularP.Controllers
 
             var result = GetPictures(list);
 
+
+            var b = await this.GET2("Batman");
+            
+
             return result;
 
+        }
+            
+        public async Task<HttpResponseMessage> GET2(string query)
+        {
+
+            string _apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";
+
+            //// SpaceX get URL
+            //string _apiUrl = "https://api.spacexdata.com/v3/launches/latest";
+
+            var client = new HttpClient();
+
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));
+            var responseMessage = await client.GetAsync(_apiUrl);
+
+
+            string myJsonAsString = null;
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                myJsonAsString = await responseMessage.Content.ReadAsStringAsync();
+            }
+
+            Weather a = JsonConvert.DeserializeObject<Weather>(myJsonAsString);
+
+            return responseMessage;
         }
 
         public IEnumerable<WeatherForecast> GetPictures(IEnumerable<WeatherForecast> weather)
@@ -68,8 +100,6 @@ namespace AngularP.Controllers
             }
 
             return weather;
-
         }
-
     }
 }
