@@ -26,5 +26,11 @@ namespace AngularP.Models
         public int Visibility { get; set; }
         [JsonProperty]
         public Wind Wind { get; set; }
+        [JsonProperty]
+        public Clouds Clouds { get; set; }
+        [JsonProperty("dt")]
+        public string DateTime { get; set; }
+        [JsonProperty]
+        public Sys Sys { get; set; }
     }
 }

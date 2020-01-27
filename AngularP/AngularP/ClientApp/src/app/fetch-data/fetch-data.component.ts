@@ -7,12 +7,6 @@ import { HttpClient } from '@angular/common/http';
     '#batman { background-color: yellow;}',
     'td {border: 1px solid #dddddd}'
   ],
-
-//  td, th {
-//    border: 1px solid #dddddd;
-//    text- align: center;
-//padding: 8px;
-//}
   templateUrl: './fetch-data.component.html'
 })
 export class FetchDataComponent {
