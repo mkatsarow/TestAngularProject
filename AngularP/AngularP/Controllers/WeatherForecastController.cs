@@ -52,7 +52,7 @@ namespace AngularP.Controllers
             var result = GetPictures(list);
 
 
-            var b = await this.GetFromAPi("query");
+            //var b = await this.GetFromAPi("query");
             
 
             return result;
@@ -62,7 +62,7 @@ namespace AngularP.Controllers
         public async Task<Weather> GetFromAPi(string query)
         {
 
-            string _apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";
+            string _apiUrl = "https://api.openweathermap.org/data/2.5/weather?=London,uk&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";                           
 
             //// SpaceX get URL
             //string _apiUrl = "https://api.spacexdata.com/v3/launches/latest";
