@@ -9,13 +9,13 @@ namespace AngularP
 {
     public class Weather
     {
-        [JsonProperty("coord")]
-        public Coord Coordinates { get; set; }
+        [JsonProperty]
+        public int Id { get; set; }
         [JsonProperty]
         public string Main { get; set; }
         [JsonProperty]
         public string Description { get; set; }
         [JsonProperty]
-        public string Base { get; set; }
+        public string Icon { get; set; }
     }
 }

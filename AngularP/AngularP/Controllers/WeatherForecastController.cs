@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using AngularP.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -52,20 +53,17 @@ namespace AngularP.Controllers
             var result = GetPictures(list);
 
 
-            //var b = await this.GetFromAPi("query");
+            var b = await this.GetFromAPi("query");
             
 
             return result;
 
         }
             
-        public async Task<Weather> GetFromAPi(string query)
+        public async Task<WeatherForecast2> GetFromAPi(string query)
         {
 
-            string _apiUrl = "https://api.openweathermap.org/data/2.5/weather?=London,uk&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";                           
-
-            //// SpaceX get URL
-            //string _apiUrl = "https://api.spacexdata.com/v3/launches/latest";
+            string _apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";                           
 
             var client = new HttpClient();
 
@@ -78,12 +76,12 @@ namespace AngularP.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 string myJsonAsString = await responseMessage.Content.ReadAsStringAsync();
-            
-                Weather myWeatherFromApi = JsonConvert.DeserializeObject<Weather>(myJsonAsString);
+
+                WeatherForecast2 myWeatherFromApi = JsonConvert.DeserializeObject<WeatherForecast2>(myJsonAsString);
 
                 return myWeatherFromApi;
             }
-
+            // if !IsSuccessStatusCode throw ex
             return null;
         }
 

@@ -6,11 +6,11 @@ using Newtonsoft.Json;
 
 namespace AngularP.Models
 {
-    public class Coord
+    public class Wind
     {
-        [JsonProperty("lon")]
-        public long Lon { get; set; }
-        [JsonProperty("lat")]
-        public long Lat { get; set; }
+        [JsonProperty]
+        public double Speed { get; set; }
+        [JsonProperty]
+        public double Deg { get; set; }
     }
 }
