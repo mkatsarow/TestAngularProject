@@ -52,14 +52,14 @@ namespace AngularP.Controllers
             var result = GetPictures(list);
 
 
-            var b = await this.GET2("Batman");
+            var b = await this.GetFromAPi("query");
             
 
             return result;
 
         }
             
-        public async Task<HttpResponseMessage> GET2(string query)
+        public async Task<Weather> GetFromAPi(string query)
         {
 
             string _apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";
@@ -70,19 +70,21 @@ namespace AngularP.Controllers
             var client = new HttpClient();
 
             client.DefaultRequestHeaders.Accept.Clear();
+            //Check should we add json as media type or its added by default
             client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
             var responseMessage = await client.GetAsync(_apiUrl);
 
-
-            string myJsonAsString = null;
             if (responseMessage.IsSuccessStatusCode)
             {
-                myJsonAsString = await responseMessage.Content.ReadAsStringAsync();
+                string myJsonAsString = await responseMessage.Content.ReadAsStringAsync();
+            
+                Weather myWeatherFromApi = JsonConvert.DeserializeObject<Weather>(myJsonAsString);
+
+                return myWeatherFromApi;
             }
 
-            Weather a = JsonConvert.DeserializeObject<Weather>(myJsonAsString);
-
-            return responseMessage;
+            return null;
         }
 
         public IEnumerable<WeatherForecast> GetPictures(IEnumerable<WeatherForecast> weather)
