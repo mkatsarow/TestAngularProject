@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http';
   selector: 'app-fetch-data',
   styles: [
     '#batman { background-color: yellow;}',
-    'td {border: 1px solid #dddddd}'
+    'td {border: 1px solid #dddddd}',
+    `myTable { border: none; }`
   ],
   templateUrl: './fetch-data.component.html'
 })
