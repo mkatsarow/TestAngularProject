@@ -4,9 +4,11 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-fetch-data',
   styles: [
-    '#batman { background-color: yellow;}',
-    'td {border: 1px solid #dddddd}',
-    `myTable { border: none; }`
+    'td {border: 2px solid #dddddd}',
+    'table.myTable { border: none; }',
+    '#myFooter {border: 2px solid #dddddd}',
+    '#myImg { border: 20; }',
+    '.date-cell { border: none; }',
   ],
   templateUrl: './fetch-data.component.html'
 })

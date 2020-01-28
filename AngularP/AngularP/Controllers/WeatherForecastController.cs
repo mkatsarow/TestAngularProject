@@ -39,7 +39,7 @@ namespace AngularP.Controllers
 
 
             var rng = new Random();
-            var list = Enumerable.Range(1, 10).Select(index => new WeatherForecast
+            var list = Enumerable.Range(1, 7).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index).ToShortDateString(),
                 Location = Locations[rng.Next(Locations.Length)],
@@ -48,7 +48,7 @@ namespace AngularP.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)],
                 Title = "Sofia"
             })
-            .Take(10).ToArray();
+            .Take(7).ToArray();
 
             var result = GetPictures(list);
 
