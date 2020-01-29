@@ -49,6 +49,7 @@ namespace AngularP.Controllers
             })
             .Take(7).ToArray();
 
+
             var weatherlist = await this.GetFromAPi("query");
 
             return weatherlist;
@@ -57,11 +58,8 @@ namespace AngularP.Controllers
         public async Task<IEnumerable<WeatherForecast2>> GetFromAPi(string query)
         {
 
+            //replace with query
             List<string> arr = new List<string>(){ "Sofia", "London","Varna","Cebu", "Plovdiv","Mexico"};
-
-            query = "London";
-
-            string _apiUrl = $"http://api.openweathermap.org/data/2.5/weather?q={query},uk&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";
 
             var client = new HttpClient();
 
