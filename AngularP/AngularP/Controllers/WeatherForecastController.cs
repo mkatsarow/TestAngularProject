@@ -37,7 +37,6 @@ namespace AngularP.Controllers
         public async Task<IEnumerable<WeatherForecast2>> Get()
         {
 
-
             var rng = new Random();
             var list = Enumerable.Range(1, 7).Select(index => new WeatherForecast
             {
@@ -50,12 +49,9 @@ namespace AngularP.Controllers
             })
             .Take(7).ToArray();
 
-            //var result = GetPictures(list);
+            var weatherlist = await this.GetFromAPi("query");
 
-            var b = await this.GetFromAPi("query");
-            var result2 = new List<WeatherForecast2>();
-
-            return b;
+            return weatherlist;
         }
 
         public async Task<IEnumerable<WeatherForecast2>> GetFromAPi(string query)
