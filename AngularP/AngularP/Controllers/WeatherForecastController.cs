@@ -34,7 +34,7 @@ namespace AngularP.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<WeatherForecast>> Get()
+        public async Task<IEnumerable<WeatherForecast2>> Get()
         {
 
 
@@ -50,20 +50,22 @@ namespace AngularP.Controllers
             })
             .Take(7).ToArray();
 
-            var result = GetPictures(list);
-
+            //var result = GetPictures(list);
 
             var b = await this.GetFromAPi("query");
-            
+            var result2 = new List<WeatherForecast2>();
 
-            return result;
-
+            return b;
         }
-            
-        public async Task<WeatherForecast2> GetFromAPi(string query)
+
+        public async Task<IEnumerable<WeatherForecast2>> GetFromAPi(string query)
         {
 
-            string _apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";                           
+            List<string> arr = new List<string>(){ "Sofia", "London","Varna","Cebu", "Plovdiv","Mexico"};
+
+            query = "London";
+
+            string _apiUrl = $"http://api.openweathermap.org/data/2.5/weather?q={query},uk&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";
 
             var client = new HttpClient();
 
@@ -71,35 +73,25 @@ namespace AngularP.Controllers
             //Check should we add json as media type or its added by default
             client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
-            var responseMessage = await client.GetAsync(_apiUrl);
+            var finalResult = new List<WeatherForecast2>();
 
-            if (responseMessage.IsSuccessStatusCode)
+            for (int i = 0; i < arr.Count; i++)
             {
-                string myJsonAsString = await responseMessage.Content.ReadAsStringAsync();
+                var newUrl = $"http://api.openweathermap.org/data/2.5/weather?q={arr[i]}&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";
 
-                WeatherForecast2 myWeatherFromApi = JsonConvert.DeserializeObject<WeatherForecast2>(myJsonAsString);
+                var responseMessage = await client.GetAsync(newUrl);
 
-                return myWeatherFromApi;
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    string myJsonAsString = await responseMessage.Content.ReadAsStringAsync();
+
+                    WeatherForecast2 myWeatherFromApi = JsonConvert.DeserializeObject<WeatherForecast2>(myJsonAsString);
+
+                    finalResult.Add(myWeatherFromApi);
+                }
             }
             // if !IsSuccessStatusCode throw ex
-            return null;
-        }
-
-        public IEnumerable<WeatherForecast> GetPictures(IEnumerable<WeatherForecast> weather)
-        {
-            foreach (var item in weather)
-            {
-                if (item.MaxTemperatureC >= 0)
-                {
-                    item.Image = "Img/Summer.jfif";
-                }
-                else
-                {
-                    item.Image = "Img/Winter.jfif";
-                }
-            }
-
-            return weather;
+            return finalResult;
         }
     }
 }

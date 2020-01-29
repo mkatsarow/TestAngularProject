@@ -54,7 +54,7 @@
 <h4><strong>SEVEN DAYS FORECAST</strong> - YR'S FORECAST</h4>
 <table class="myTable" style="display:inline">
   <!--cellspacing="2" cellpadding="5"-->
-  <tr *ngFor="let forecast of forecasts" class="noBorder">
+  <tr *ngFor="let forecast of forecasts2" class="noBorder">
     <td class="date-cell">
       <div class="card">
         <div style="color:black;font-size:23px;padding-left:10px;padding-right:10px;padding-top:10px;">
@@ -68,21 +68,21 @@
           <img src="Img/d100.png" width="50" id="myImg">
         </div>
         <div style="font-size:20px;" align="center">
-          {{ forecast.location }}
+          {{ forecast.name }}
         </div>
         <div align="center" style="color:red;font-size:20px;">
-          {{ forecast.maxTemperatureF }} &#8451;
+          {{ forecast.main.temp_max }} &#8451;
         </div>
         <br />
         <div align="center" style="color:black;font-size:15px;">
           Lowest
           <div align="center" style="color:red;font-size:14px;">
-            {{forecast.minTemperatureF}} &#8451;
+            {{forecast.main.temp_min}} &#8451;
           </div>
         </div>
         <br />
         <div align="center" style="color:blue;font-size:14px;">
-          &#x2B08; 16 mph
+          &#x2B08; {{ forecast.wind.speed}} mph
         </div>
         <br />
       </div>

@@ -14,11 +14,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FetchDataComponent {
   public forecasts: WeatherForecast[];
+  public forecasts2: WeatherForecast2[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<WeatherForecast[]>(baseUrl + 'weatherforecast').subscribe(result => {
-      this.forecasts = result;
+    http.get<WeatherForecast2[]>(baseUrl + 'weatherforecast').subscribe(result => {
+      this.forecasts2 = result;
     }, error => console.error(error));
+
+
   }
 }
 
@@ -33,4 +36,26 @@ interface WeatherForecast {
   image: string;
   hours: number[];
   title: string; 
+}
+
+interface WeatherForecast2 {
+  id: string;
+  Base: string;
+  timezone: number;
+  name: number;
+  cod: number;
+  wind: Wind;
+  main: Main;
+}
+interface Wind {
+  speed: number;
+  deg: number;
+}
+interface Main {
+  temp: number;
+  feels_like: number;
+  temp_min: number;
+  temp_max: number;
+  pressure: number;
+  humidity: number;
 }
