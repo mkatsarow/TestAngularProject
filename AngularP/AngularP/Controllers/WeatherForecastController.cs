@@ -16,14 +16,10 @@ namespace AngularP.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
         private static readonly string[] Locations = new[]
         {
-            "Sofia", "Plovdiv", "Varna"
+            "Sofia", "London","Varna","Cebu", "Plovdiv","Mexico"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
@@ -37,19 +33,6 @@ namespace AngularP.Controllers
         public async Task<IEnumerable<WeatherForecast2>> Get()
         {
 
-            var rng = new Random();
-            var list = Enumerable.Range(1, 7).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index).ToShortDateString(),
-                Location = Locations[rng.Next(Locations.Length)],
-                MaxTemperatureC = rng.Next(-20, 55),
-                MinTemperatureC = rng.Next(-40, -20),
-                Summary = Summaries[rng.Next(Summaries.Length)],
-                Title = "Sofia"
-            })
-            .Take(7).ToArray();
-
-
             var weatherlist = await this.GetFromAPi("query");
 
             return weatherlist;
@@ -59,7 +42,7 @@ namespace AngularP.Controllers
         {
 
             //replace with query
-            List<string> arr = new List<string>(){ "Sofia", "London","Varna","Cebu", "Plovdiv","Mexico"};
+            List<string> arr = Locations.ToList();
 
             var client = new HttpClient();
 
