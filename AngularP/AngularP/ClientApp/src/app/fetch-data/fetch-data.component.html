@@ -1,60 +1,44 @@
-<!--<style>
-  body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
 
-  .hero-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("Winter.jfif");
-    height: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-  }
-
-  .hero-text {
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-  }
-
-    .hero-text button {
-      border: none;
-      outline: 0;
-      display: inline-block;
-      padding: 10px 25px;
-      color: black;
-      background-color: #ddd;
-      text-align: center;
-      cursor: pointer;
-    }
-
-      .hero-text button:hover {
-        background-color: #555;
-        color: white;
-      }
-</style>
-
-<div class="hero-image">
-  <div class="hero-text">
-    <h1>I am John Doe</h1>
-    <p>And I'm a Photographer</p>
-    <button>Hire me</button>
+<!--<header>
+  <div class="topnav">
+      <a class="netinfoTopLogo" target="_blank" href="https://www.telerikacademy.com/" style="color:black">Telerik Academy</a>
+      <a class="vestiTopLogo" target="_blank" href="https://www.udemy.com/" style="color:black">Udemy</a>
+      <a class="sportniTopLogo" target="_blank" href="https://softuni.bg/" style="color:black">SoftUni</a>
+      <a class="darknewsTopLogo" target="_blank" href="https://www.pluralsight.com/"style="color:black">PluralSight</a>
+      <a class="novaTopLogo" target="_blank" href="https://nova.bg/" style="color:black">Nova.bg</a>
   </div>
-</div>-->
-<div>
-  <img src="Img/Winter.jfif" width="100%" height="200px" />
-</div>
+  <div class="headerMain">
+    <div>
+      <a href="https://www.sinoptik.bg/" class="sinoptikLogo">Прогноза за времето в България и по света от Telerik.bg</a>
+      <div class="searchTop">
+        <form method="get" action="https://www.sinoptik.bg/search">
+          <p>
+            <input type="text" id="searchField" name="q" title="Търси град" value="" class="searchTopField blur" autocomplete="off">
+            <button class="searchTopButton">Търси</button>
+          </p>
+          <p class="radioButtons">
+            <input type="radio" id="inSinoptik" name="in" value="sinoptik" checked="checked">
+            <label for="inSinoptik">В Telerik.bg</label>
+            <input type="radio" id="inMap" name="in" value="map">
+            <label for="inMap">В карта</label>
+          </p>
+        </form>
+      </div>
+      <div class="mobileSocialWidgets">
+        <a href="https://m.sinoptik.bg/?view=mobile" target="_blank" class="mobile" title="Мобилна версия">Мобилна версия</a>
+        <a href="http://www.facebook.com/Sinoptik.bg" target="_blank" class="fb" title="Стани фен">Стани фен</a>
+        <a href="https://instagram.com/sinoptik.bg" target="_blank" class="insta" title="Instagram профил">Instagram профил</a>
+        <a href="https://www.sinoptik.bg/widgets" class="widgetsIco" title="Времето в твоя сайт">Времето в твоя сайт</a>
+      </div>
+    </div>
+  </div>
+</header>
+<br />-->
 <br />
 <h4><strong>SEVEN DAYS FORECAST</strong> - YR'S FORECAST</h4>
 <table class="myTable" style="display:inline">
   <!--cellspacing="2" cellpadding="5"-->
-  <tr *ngFor="let forecast of forecasts2" class="noBorder">
+  <tr *ngFor="let forecast of forecasts" class="noBorder">
     <td class="date-cell">
       <div class="card">
         <div style="color:black;font-size:23px;padding-left:10px;padding-right:10px;padding-top:10px;">
@@ -179,7 +163,3 @@
 
 </footer>
 <!-- Footer -->
-
-
-
-

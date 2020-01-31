@@ -17,58 +17,54 @@ namespace AngularP.Controllers
     public class WeatherForecastController : ControllerBase
     {
 
-        private static readonly string[] Locations = new[]
+        private static readonly List<string> Locations = new List<string>
         {
             "Sofia", "London","Varna","Cebu", "Plovdiv","Mexico"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<WeatherForecastController> logger;
+        private readonly IHttpClientFactory clientFactory;
+        private const string baseUrl = "http://api.openweathermap.org/data/2.5/weather?q=Sofia&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger,
+                                        IHttpClientFactory clientFactory)
         {
-            _logger = logger;
+            this.logger = logger;
+            this.clientFactory = clientFactory;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<WeatherForecast2>> Get()
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
+            var result = new List<WeatherForecast>();
 
-            var weatherlist = await this.GetFromAPi("query");
+            foreach (var item in Locations)
+            {
+                result.Add(await GetList(item));
+            }
 
-            return weatherlist;
+            return result;
         }
 
-        public async Task<IEnumerable<WeatherForecast2>> GetFromAPi(string query)
+        public async Task<WeatherForecast> GetList(string city)
         {
+            var tempUrl = $"http://api.openweathermap.org/data/2.5/weather?q={city}&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";
 
-            //replace with query
-            List<string> arr = Locations.ToList();
+            var responseMessage = await this.clientFactory.CreateClient().GetAsync(tempUrl);
 
-            var client = new HttpClient();
-
-            client.DefaultRequestHeaders.Accept.Clear();
-            //Check should we add json as media type or its added by default
-            client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));
-
-            var finalResult = new List<WeatherForecast2>();
-
-            for (int i = 0; i < arr.Count; i++)
+            if (responseMessage.IsSuccessStatusCode)
             {
-                var newUrl = $"http://api.openweathermap.org/data/2.5/weather?q={arr[i]}&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";
+                string myJsonAsString = await responseMessage.Content.ReadAsStringAsync();
 
-                var responseMessage = await client.GetAsync(newUrl);
-
-                if (responseMessage.IsSuccessStatusCode)
-                {
-                    string myJsonAsString = await responseMessage.Content.ReadAsStringAsync();
-
-                    WeatherForecast2 myWeatherFromApi = JsonConvert.DeserializeObject<WeatherForecast2>(myJsonAsString);
-
-                    finalResult.Add(myWeatherFromApi);
-                }
+                return JsonConvert.DeserializeObject<WeatherForecast>(myJsonAsString);
             }
-            // if !IsSuccessStatusCode throw ex
-            return finalResult;
+            else
+            {
+                this.logger.LogError($"City with name not found." +
+                                     $" {responseMessage.Content}. At: {DateTime.UtcNow}");
+
+                throw new ArgumentNullException();
+            }
         }
     }
 }
