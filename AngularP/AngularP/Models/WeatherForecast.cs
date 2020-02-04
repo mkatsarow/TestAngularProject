@@ -11,6 +11,7 @@ namespace AngularP.Models
     {
         [JsonProperty]
         public string Id { get; set; }
+
         [JsonProperty]
         public string Base { get; set; }
         [JsonProperty]
@@ -34,6 +35,8 @@ namespace AngularP.Models
         public Wind Wind { get; set; }
         [JsonProperty]
         public Clouds Clouds { get; set; }
+
+
         [JsonProperty("dt")]
         [Required]
         public string DateTime { get; set; }

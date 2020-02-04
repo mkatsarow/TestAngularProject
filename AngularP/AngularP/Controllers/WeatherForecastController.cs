@@ -38,6 +38,25 @@ namespace AngularP.Controllers
         {
             var result = new List<WeatherForecast>();
 
+            Func<string, WeatherForecast> test = x => GetList(x).Result;
+
+             Locations.ForEach(x =>  GetList(x));
+
+
+            string[] fruits = { "apple", "mango", "orange", "passionfruit", "grape" };
+
+            // Determine whether any string in the array is longer than "banana".
+            string longestName =
+                fruits.Aggregate("banana",
+                                (longest, next) =>
+                                    next.Length > longest.Length ? next : longest,
+                                // Return the final result as an upper case string.
+                                fruit => fruit.ToUpper());
+
+            var testResult = Locations.Aggregate((current, next) => current + GetList(next));
+
+
+
             foreach (var item in Locations)
             {
                 result.Add(await GetList(item));

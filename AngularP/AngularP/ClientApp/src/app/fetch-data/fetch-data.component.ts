@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   styles: [
     'td {border: 2px solid #dddddd}',
     'table.myTable { border: none; }',
-    '#myFooter {border: 2px solid #dddddd}',
+   
     '#myImg { border: 20; }',
     '.date-cell { border: none; }',
     '.headerMain { height: 106px; background: url(Img/Winter.jfif) repeat - x 0 - 27px;}',
