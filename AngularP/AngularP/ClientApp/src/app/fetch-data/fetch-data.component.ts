@@ -47,6 +47,8 @@ interface Main {
   feels_like: number;
   temp_min: number;
   temp_max: number;
+  temp_max_C: number;
+  temp_min_C: number;
   pressure: number;
   humidity: number;
 }

@@ -19,15 +19,14 @@ namespace AngularP.Controllers
 
         private static readonly List<string> Locations = new List<string>
         {
-            "Sofia", "London","Varna","Cebu", "Plovdiv","Mexico"
+            "Sofia", "London","Varna","Cebu", "Plovdiv","Mexico","Mexico"
         };
 
         private readonly ILogger<WeatherForecastController> logger;
         private readonly IHttpClientFactory clientFactory;
-        private const string baseUrl = "http://api.openweathermap.org/data/2.5/weather?q=Sofia&APPID=086f766a6e40a5e8f8b3b5d917fc4b31";
-
+ 
         public WeatherForecastController(ILogger<WeatherForecastController> logger,
-                                        IHttpClientFactory clientFactory)
+                                         IHttpClientFactory clientFactory)
         {
             this.logger = logger;
             this.clientFactory = clientFactory;
@@ -36,14 +35,7 @@ namespace AngularP.Controllers
         [HttpGet]
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
-            var result = new List<WeatherForecast>();
-
-            foreach (var item in Locations)
-            {
-                result.Add(await GetList(item));
-            }
-
-            return result;
+            return await Task.WhenAll(Locations.Select(x =>  GetList(x)));
         }
 
         public async Task<WeatherForecast> GetList(string city)

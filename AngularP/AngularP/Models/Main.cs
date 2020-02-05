@@ -17,6 +17,8 @@ namespace AngularP.Models
         [JsonProperty]
         public double Temp_max { get; set; }
         [JsonProperty]
+        public double Temp_max_C { get; set; } 
+        public double Temp_min_C { get; set; }
         public double Pressure { get; set; }
         [JsonProperty]
         public int Humidity { get; set; }
