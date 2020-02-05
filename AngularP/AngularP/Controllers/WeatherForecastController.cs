@@ -52,7 +52,7 @@ namespace AngularP.Controllers
             }
             else
             {
-                this.logger.LogError($"City with name not found." +
+                this.logger.LogError($"City with {city} not found." +
                                      $" {responseMessage.Content}. At: {DateTime.UtcNow}");
 
                 throw new ArgumentNullException();
