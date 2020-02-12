@@ -11,6 +11,8 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { FooterComponent } from './footer/footer.component';
 
+import { NgbdDropdownBasic } from './button/dropdown-basic';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,8 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    FooterComponent
+    FooterComponent,
+    NgbdDropdownBasic
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,7 +31,9 @@ import { FooterComponent } from './footer/footer.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'app-footer', component: FooterComponent }
+      { path: 'app-footer', component: FooterComponent },
+      { path: 'ngbd-dropdown-basic', component: NgbdDropdownBasic }
+      
     ])
   ],
   providers: [],

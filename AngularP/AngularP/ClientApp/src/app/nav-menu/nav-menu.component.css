@@ -16,3 +16,17 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
+.headerTop {
+  padding-left: 5px;
+  overflow: hidden;
+  background: #ffffff;
+
+}
+
+.wrapper {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 0 10px;
+    position: relative;
+}

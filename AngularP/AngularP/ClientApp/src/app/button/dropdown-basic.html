@@ -1,0 +1,19 @@
+<div ngbDropdown class="d-inline-block">
+
+  <button class="btn btn-outline-primary"
+          id="dropdownMenu1"
+          ngbDropdownToggle>
+
+    {{displayMessage}}
+  </button>
+
+  <div class="dropdown-menu" id="options" aria-labelledby="dropdownMenu1">
+    <div *ngFor="let option of sortOptions">
+      <button class="dropdown-item"
+              id="option" on-click="changeMessage(option)">
+        {{option}}
+      </button>
+
+    </div>
+  </div>
+</div>
